@@ -1,4 +1,4 @@
-FROM ./base.Dockerfile
+FROM coder-base:latest
 
 # Run everything as root
 USER root

@@ -52,7 +52,7 @@ variable "docker_image" {
 }
 
 resource "docker_volume" "coder_volume" {
-  name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}-root"
+  name = "coder-${data.coder_workspace.me.owner}-${lower(data.coder_workspace.me.name)}-root"
 }
 
 resource "docker_image" "coder_image" {
@@ -64,9 +64,9 @@ resource "docker_image" "coder_image" {
   }
 
   # Other workspaces will depend on images like this
-  lifecycle {
-    prevent_destroy = true
-  }
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 
 }
 

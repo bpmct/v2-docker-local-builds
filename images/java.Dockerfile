@@ -1,1 +1,1 @@
-FROM ./java.Dockerfile
+FROM coder-base:latest
