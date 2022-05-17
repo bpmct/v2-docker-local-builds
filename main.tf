@@ -51,7 +51,7 @@ variable "docker_image" {
   }
 }
 
-resource "docker_volume" "coder_volume" {
+resource "docker_volume" "home_volume" {
   name = "coder-${data.coder_workspace.me.owner}-${lower(data.coder_workspace.me.name)}-root"
 }
 
@@ -60,14 +60,11 @@ resource "docker_image" "coder_image" {
   build {
     path       = "./images/"
     dockerfile = "${var.docker_image}.Dockerfile"
-    tag        = ["coder-${var.docker_image}:latest"]
+    tag        = ["coder-${var.docker_image}:v0.12"]
   }
 
-  # Other workspaces will depend on images like this
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
-
+  # Keep alive for other workspaces to use upon deletion
+  keep_locally = true
 }
 
 resource "docker_container" "workspace" {
@@ -82,7 +79,7 @@ resource "docker_container" "workspace" {
   env      = ["CODER_AGENT_TOKEN=${coder_agent.dev.token}"]
   volumes {
     container_path = "/home/coder/"
-    volume_name    = docker_volume.coder_volume.name
+    volume_name    = docker_volume.home_volume.name
     read_only      = false
   }
 }

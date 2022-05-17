@@ -3,7 +3,7 @@ FROM coder-base:latest
 # Run everything as root
 USER root
 
-# Install whichever Node version is LTS
+# Install Node
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y && \
     apt-get install -y nodejs
