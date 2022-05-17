@@ -60,7 +60,7 @@ resource "docker_image" "coder_image" {
   build {
     path       = "./images/"
     dockerfile = "${var.docker_image}.Dockerfile"
-    tag        = ["coder-${var.docker_image}:v0.12"]
+    tag        = ["coder-${var.docker_image}:v0.1"]
   }
 
   # Keep alive for other workspaces to use upon deletion

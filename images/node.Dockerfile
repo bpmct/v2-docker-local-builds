@@ -1,6 +1,7 @@
+# Start from base image (built on Docker host)
 FROM coder-base:latest
 
-# Run everything as root
+# Install everything as root
 USER root
 
 # Install Node
